@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://kshitizb31:31101995@cluster0-2epjb.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://kshitizb31:31101995@cluster0-2epjb.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretToken"
 }
