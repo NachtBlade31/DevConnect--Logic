@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types'
 
 
-function Register() {
+function Register({ setAlert, register, isAuthenticated }) {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -21,31 +25,18 @@ function Register() {
     const formSubmit = async e => {
         e.preventDefault();
         if (password !== password2) {
-            console.log("Password Doesnt match")
+            setAlert("Password Do Not match", 'danger')
+
         } else {
 
-            console.log("success");
-            const newUser = {
-                name,
-                email,
-                password
-            }
-            try {
-                const config = {
-                    header: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-                body = JSON.stringify(newUser)
-                const res = await axios.post('/api/users', newUser, config);
-                console.log(res.data);
-            }
-            catch (err) {
-                console.error(err.response.data);
-            }
+            register({ name, email, password });
         }
-
     };
+
+
+    if (isAuthenticated) {
+        return <Redirect to='/dashboard' />
+    }
     return (
         <div>
             <h1 className="large text-primary">Sign Up</h1>
@@ -77,4 +68,14 @@ function Register() {
     )
 }
 
-export default Register
+Register.prototype = {
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
