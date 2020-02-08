@@ -5,6 +5,7 @@ const config = require('config')
 const auth = require('../../middleWare/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post')
 const { check, validationResult } = require('express-validator');
 
 //@route  GET api/profile/me
@@ -129,7 +130,8 @@ router.get("/user/:user_id", async (req, res) => {
 //@access Private
 router.delete("/", auth, async (req, res) => {
     try {
-        //@todo - remove users posts
+        // Remove users posts
+        await Post.deleteMany({ user: req.user.id });
 
         // Remove profile
         await Profile.findOneAndRemove({ user: req.user.id });
@@ -176,7 +178,7 @@ router.put("/experience", [auth,
         let profile = await Profile.findOne({ user: req.user.id })
         profile.experience.unshift(newExp);
         await profile.save();
-        res.json({ profile });
+        res.json(profile);
     }
     catch (error) {
         console.error(error.message);
@@ -237,7 +239,7 @@ router.put("/education", [auth,
         let profile = await Profile.findOne({ user: req.user.id })
         profile.education.unshift(newEd);
         await profile.save();
-        res.json({ profile });
+        res.json(profile);
     }
     catch (error) {
         console.error(error.message);
