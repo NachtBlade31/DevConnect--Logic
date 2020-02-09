@@ -7,7 +7,7 @@ import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
-import ProfileEducation from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
 
 const Profile = ({ getProfileById,
     profile: { profile, loading },
