@@ -8,6 +8,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 
 const Profile = ({ getProfileById,
     profile: { profile, loading },
@@ -16,8 +17,8 @@ const Profile = ({ getProfileById,
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
     return (
-        <div>
-            {!profile || loading ? <Spinner /> : <div>
+        <Fragment>
+            {!profile || loading ? <Spinner /> : <Fragment>
                 <Link to='/profiles' className='btn btn-light'>Back To Profile</Link>
                 {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id &&
                     (
@@ -49,12 +50,13 @@ const Profile = ({ getProfileById,
                         </Fragment>) :
                             (<h4>No Education added.</h4>)}
                     </div>
-
-
-
+                    {profile.githubusername &&
+                        (
+                            <ProfileGithub username={profile.githubusername} />
+                        )}
                 </div>
-            </div>}
-        </div>
+            </Fragment>}
+        </Fragment>
     )
 }
 
