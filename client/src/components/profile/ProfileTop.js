@@ -65,7 +65,7 @@ const ProfileTop = ({ profile: {
 
 ProfileTop.propTypes = {
     profile: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object
 }
 
 export default ProfileTop

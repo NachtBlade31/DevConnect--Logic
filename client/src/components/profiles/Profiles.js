@@ -24,7 +24,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                             profiles.map(profile => (
                                 <ProfileItem key={profile._id} profile={profile} />
                             ))
-                        ) : <h4>No Profile found</h4>
+                        ) : <Spinner />
                         }
                     </div>
                 </div>}

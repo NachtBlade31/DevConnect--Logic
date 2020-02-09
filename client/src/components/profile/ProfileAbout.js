@@ -7,7 +7,7 @@ const ProfileAbout = ({ profile: {
     user: { name }
 } }) => {
     return (
-        <div class="profile-about bg-light p-2">{
+        <div className="profile-about bg-light p-2">{
             bio && (<div>
                 <h2 className="text-primary">{name.trim().split(' ')[0]}'s Bio</h2>
                 <p>{bio}</p>
