@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST } from '../actions/types';
+import { GET_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
 const initislState = {
     posts: [],
     post: null,
@@ -45,6 +45,22 @@ export default function (state = initislState, action) {
             return {
                 ...state,
                 posts: state.posts.map(post => post._id === payload.id ? { ...post, likes: payload.likes } : post),
+                loading: false
+            }
+
+        case ADD_COMMENT:
+            return {
+                ...state,
+                post: { ...state.post, comments: payload },
+                loading: false
+            }
+        case REMOVE_COMMENT:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: state.post.comments.filter(comment => comment._id !== payload)
+                },
                 loading: false
             }
         default:
