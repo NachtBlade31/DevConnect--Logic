@@ -12,7 +12,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         getCurrentProfile();
     }, [getCurrentProfile])
     return (
-        loading || !profile ? <Spinner /> : <div>
+        loading && !profile ? <Spinner /> : <div>
 
             <h1 className="large text-primary">Dashboard</h1>
             <p className="lead">
