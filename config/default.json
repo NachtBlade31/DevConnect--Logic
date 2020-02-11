@@ -1,6 +1,6 @@
 {
     "mongoURI": "mongodb+srv://kshitizb31:31101995@cluster0-2epjb.mongodb.net/test?retryWrites=true&w=majority",
     "jwtSecret": "mySecretToken",
-    "githubToken": "ab96de79a47d092ffe6dd782d1ce38c59c195f26"
+    "githubToken": "41e0aa7d5ca36ed903e4ae4d2ec8e74aef94ff70"
 
 }
